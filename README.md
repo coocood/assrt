@@ -42,5 +42,5 @@ Usage
 
     	//you can pass optional log messages in assert methods, if not provided, assert will log
     	//default messages.
-    	assert.PositiveLen(slice,, "slice is empty")
+    	assert.PositiveLen(slice, "slice should be positive")
     }
