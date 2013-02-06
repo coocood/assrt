@@ -33,7 +33,7 @@ func (ast *Assert) MustNotNil(value interface {}, logs ...interface {}) {
 }
 
 func (ast *Assert) nilAssert(fatal bool, isNil bool, value interface {}, logs ...interface {}) {
-	if isNil != (value == nil) {
+	if isNil != (reflect.ValueOf(value).IsNil()) {
 		ast.logCaller()
 		if len(logs) > 0 {
 			ast.Log(logs...)
