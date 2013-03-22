@@ -5,7 +5,6 @@ import (
 	"testing"
 	"runtime"
 	"reflect"
-	"strings"
 )
 
 type Assert struct {
@@ -182,8 +181,7 @@ func (ast *Assert) oneLenAssert(fatal bool, value interface {}, logs ...interfac
 
 func (ast *Assert) logCaller(){
 	_, file, line, _ := runtime.Caller(3)
-	paths := strings.Split(file,"/")
-	ast.Logf("Caller: %v:%d", paths[len(paths)-1], line)
+	ast.Logf("Caller: %v:%d", file, line)
 }
 
 func (ast *Assert) failIt(fatal bool){
