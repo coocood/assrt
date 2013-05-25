@@ -5,6 +5,7 @@ import (
 	"testing"
 	"runtime"
 	"reflect"
+	"fmt"
 )
 
 type Assert struct {
@@ -80,6 +81,23 @@ func (ast *Assert) NotEqual(expected, actual interface {}, logs ...interface {})
 
 func (ast *Assert) MustNotEqual(expected, actual interface {}, logs ...interface {}) {
 	ast.equalAssert(true, false, expected, actual, logs...)
+}
+
+
+func (ast *Assert) EqualSprint(expected, actual interface {}, logs ...interface {}) {
+	ast.equalAssert(false, true, fmt.Sprint(expected), fmt.Sprint(actual), logs...)
+}
+
+func (ast *Assert) MustEqualSprint(expected, actual interface {}, logs ...interface {}) {
+	ast.equalAssert(true, true, fmt.Sprint(expected), fmt.Sprint(actual), logs...)
+}
+
+func (ast *Assert) NotEqualSprint(expected, actual interface {}, logs ...interface {}) {
+	ast.equalAssert(false, false, fmt.Sprint(expected), fmt.Sprint(actual), logs...)
+}
+
+func (ast *Assert) MustNotEqualSprint(expected, actual interface {}, logs ...interface {}) {
+	ast.equalAssert(true, false, fmt.Sprint(expected), fmt.Sprint(actual), logs...)
 }
 
 func (ast *Assert) equalAssert(fatal bool, isEqual bool, expected, actual interface {}, logs ...interface {}) {
@@ -178,6 +196,7 @@ func (ast *Assert) oneLenAssert(fatal bool, value interface {}, logs ...interfac
 		ast.failIt(fatal)
 	}
 }
+
 
 func (ast *Assert) logCaller(){
 	_, file, line, _ := runtime.Caller(3)
